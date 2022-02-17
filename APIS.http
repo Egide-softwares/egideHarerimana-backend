@@ -1,0 +1,11 @@
+@BASE_URL=http://localhost:3000
+
+# get server status
+GET {{BASE_URL}}
+Content-Type: application/json
+
+###
+
+# Get all users
+GET {{BASE_URL}}/api/users
+Content-Type: application/json
