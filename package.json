@@ -4,9 +4,10 @@
   "description": "Back-end for electricity billing system",
   "main": "./src/main.ts",
   "scripts": {
+	"generate": "npx prisma generate",
     "start:dev": "nodemon",
     "build": "rimraf ./build && tsc",
-    "start": "npm run build && node build/main.js"
+    "start": "npm run generate && npm run build && node build/main.js"
   },
   "repository": "https://github.com/Egide-softwares/egideHarerimana-backend.git",
   "author": "Harerimana Egide <egideharerimana085@gmail.com>",

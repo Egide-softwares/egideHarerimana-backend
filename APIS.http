@@ -1,4 +1,5 @@
 @BASE_URL=http://localhost:3000
+@TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOaWQiOiIxMjM0NTY3ODkwMTIzNDU2Iiwic2lnbmVkIjoiMjAyMi0wMi0xN1QxNDoyNTo1MC44MzhaIiwiaWF0IjoxNjQ1MTA3OTUwfQ.vmjl4NDQ9vg0w5Wh3KnrsPJdKyi3p3RQafIO9iNNbms
 
 # get server status
 GET {{BASE_URL}}
@@ -9,3 +10,29 @@ Content-Type: application/json
 # Get all users
 GET {{BASE_URL}}/api/users
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
+
+###
+
+# Create a new User
+POST {{BASE_URL}}/api/users/newAccount
+Content-Type: application/json
+
+{
+	"firstName": "Harerimana",
+	"lastName": "Egide",
+	"email": "egideharerimana085@gmail.com",
+	"password": "123456",
+	"nid": "1234567890123456"
+}
+
+###
+
+# User login
+POST  {{BASE_URL}}/api/users/userLogin
+Content-Type: application/json
+
+{
+	"email": "egideharerimana085@gmail.com",
+	"password": "123456"
+}
