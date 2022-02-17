@@ -15,7 +15,7 @@ model User {
 	lastName	String		@db.VarChar(255)
 	email 	String	@unique @db.VarChar(255)
 	nid		String	@unique	@db.VarChar(255)
-	meterNumber Int @unique
+	meterNumber String @unique
 	password 	String 	@db.VarChar(255)
 	tokens Token[]
 	transactions Transaction[]
@@ -32,7 +32,7 @@ model Token {
 	user   User @relation(fields: [userId], references: [id])
   	userId Int
 	transactions Transaction[]
-	meterNumber Int
+	meterNumber String
 }
 
 model Transaction {

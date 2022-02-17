@@ -44,16 +44,48 @@ transactionsRouter.post("/newtransaction", isLoggedIn, async (req: Request, res:
 
 	if (existingToken) token = Math.floor(10000000 + Math.random() * 90000000);
 
-	const newTokenRecord = await prisma.token.create({
-		data: {
-			content: token,
-			isActivated: false,
-			activatedOn: null,
-			days: 1,
-			userId: req.authentication?.userId,
-			meterNumber: req.body.meterNumber,
-			createdAt: new Date(Date.now()),
-			updatedAt: new Date(Date.now())
-		}
-	});
+	try {
+		const newTokenRecord = await prisma.token.create({
+			data: {
+				content: token,
+				isActivated: false,
+				activatedOn: null,
+				days: req.body.paidAmount / 100,
+				userId: req.authentication?.userId,
+				meterNumber: req.body.meterNumber,
+				createdAt: new Date(Date.now()),
+				updatedAt: new Date(Date.now())
+			}
+		});
+
+		const newTransactionRecord = await prisma.transaction.create({
+			data: {
+				userId: req.authentication?.userId,
+				amountPaid: req.body.paidAmount,
+				tokenId: newTokenRecord.id,
+				createdAt: new Date(Date.now()),
+				updatedAt: new Date(Date.now())
+			}
+		});
+
+		if (!newTokenRecord || !newTransactionRecord) return res.status(500).send({
+			status: 500,
+			message: "something went wrong"
+		});
+
+		return res.status(201).send({
+			status: 201,
+			message: "success",
+			data: {
+				generatedToken: token,
+				tokenRecord: newTokenRecord,
+				transactionRecord: newTransactionRecord
+			}
+		});
+	} catch (error) {
+		return res.status(500).send({
+			status: 500,
+			message: "something went wrong"
+		});
+	}
 });

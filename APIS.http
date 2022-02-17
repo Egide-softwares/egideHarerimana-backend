@@ -54,6 +54,6 @@ Content-Type: application/json
 Authorization: Bearer {{TOKEN}}
 
 {
-	"paidAmount": 1000,
+	"paidAmount": 11,
 	"meterNumber": 50
 }

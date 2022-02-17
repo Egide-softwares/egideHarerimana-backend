@@ -64,7 +64,7 @@ usersRouter.post("/newAccount", async (req: Request, res: Response) => {
 	});
 
 	if (!user) {
-		return res.status(201).send({
+		return res.status(500).send({
 			status: 500,
 			message: "something went wrong"
 		});
