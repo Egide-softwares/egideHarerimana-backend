@@ -23,6 +23,7 @@ Content-Type: application/json
 	"lastName": "Egide",
 	"email": "egideharerimana085@gmail.com",
 	"password": "123456",
+	"meterNumber": 50,
 	"nid": "1234567890123456"
 }
 
@@ -35,4 +36,24 @@ Content-Type: application/json
 {
 	"email": "egideharerimana085@gmail.com",
 	"password": "123456"
+}
+
+###
+
+# get all transactions
+GET {{BASE_URL}}/api/transactions
+Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
+
+###
+
+# Buy Electricity
+
+POST {{BASE_URL}}/api/transactions/newtransaction
+Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
+
+{
+	"paidAmount": 1000,
+	"meterNumber": 50
 }

@@ -15,6 +15,7 @@ model User {
 	lastName	String		@db.VarChar(255)
 	email 	String	@unique @db.VarChar(255)
 	nid		String	@unique	@db.VarChar(255)
+	meterNumber Int @unique
 	password 	String 	@db.VarChar(255)
 	tokens Token[]
 	transactions Transaction[]
@@ -24,12 +25,14 @@ model Token {
 	id 		Int 	@id @default(autoincrement())
 	createdAt 	DateTime 	@default(now())
   	updatedAt 	DateTime 	@updatedAt
-	content String @db.VarChar(255)
+	content Int @unique
 	isActivated Boolean @default(false)
-	activatedOn DateTime
+	activatedOn DateTime?
 	days Int
 	user   User @relation(fields: [userId], references: [id])
   	userId Int
+	transactions Transaction[]
+	meterNumber Int
 }
 
 model Transaction {
@@ -39,5 +42,6 @@ model Transaction {
 	user   User @relation(fields: [userId], references: [id])
   	userId Int
 	amountPaid 	Int @db.Int
-	token String @unique @db.VarChar(255)
+	token Token @relation(fields: [tokenId], references: [id])
+	tokenId Int
 }

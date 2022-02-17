@@ -1,6 +1,7 @@
 import { config } from "dotenv";
 import express, { Request, Response } from "express";
 import { prisma } from "./db/prisma";
+import { transactionsRouter } from "./routes/transactions";
 import { usersRouter } from "./routes/users";
 
 const app = express()
@@ -19,6 +20,7 @@ app.get("", (req: Request, res: Response)=> {
 });
 
 app.use("/api/users", usersRouter);
+app.use("/api/transactions", transactionsRouter);
 
 app.listen(3000, ()=> console.log(`SERVER STARTED ON PORT ${3000}`));
 

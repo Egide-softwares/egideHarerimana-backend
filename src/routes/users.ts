@@ -38,6 +38,7 @@ usersRouter.post("/newAccount", async (req: Request, res: Response) => {
 		  OR: [
 			{ email: req.body.email },
 			{ nid: req.body.nid },
+			{ meterNumber: req.body.meterNumber }
 		  ]
 		}
 	  });
@@ -55,6 +56,7 @@ usersRouter.post("/newAccount", async (req: Request, res: Response) => {
 			lastName: req.body.lastName,
 			email: req.body.email,
 			nid: req.body.nid,
+			meterNumber: req.body.meterNumber,
 			password: hashedPassword,
 			createdAt: new Date(Date.now()),
 			updatedAt: new Date(Date.now())
@@ -100,6 +102,7 @@ usersRouter.post("/userLogin", async (req: Request, res: Response)=> {
 	const token = sign({
 		userId: user.id, 
 		userNid: user.nid, 
+		meterNumber: user.meterNumber,
 		signed: new Date(Date.now())
 	}, process.env.JWT_SECRET as string);
 
